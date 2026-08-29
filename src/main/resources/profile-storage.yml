@@ -1,0 +1,69 @@
+#########################################################################
+# Database type, options are SQLITE, MYSQL, POSTGRESQL
+# Note: we do NOT automatically migrate your data when switching database types :)
+# Note: when using MYSQL across servers, make sure allow-open-when-owner-offline in config.yml is set to false
+#      to prevent players from duping items by opening the same backpack on different servers.
+storageType: SQLITE
+
+# Use Base64 encoding for data fields
+base64EncodeVal: true
+#########################################################################
+
+#########################################################################
+# Number of database read/write threads
+# When using MYSQL, it is recommended that maximum connections = read + write threads, and the number of read threads should be greater than write threads.
+# Note: more threads is not always better - too many can actually hurt performance. Please allocate an appropriate amount.
+
+# Number of read threads
+readExecutorThread: 7
+# Number of write threads
+writeExecutorThread: 3
+#########################################################################
+
+#########################################################################
+# SQLite configuration
+sqlite:
+  maxConnection: 5
+#########################################################################
+
+#########################################################################
+# MySQL configuration
+mysql:
+  # Database connection address
+  host: "127.0.0.1"
+  # Database connection port
+  port: 3306
+  # Database name
+  database: ""
+  # Table prefix
+  tablePrefix: ""
+  # Connection username
+  user: ""
+  # Connection password
+  password: ""
+  # Whether to use an encrypted connection
+  useSSL: false
+  # Maximum number of connections
+  maxConnection: 10
+#########################################################################
+
+#########################################################################
+# PostgreSQL configuration
+postgresql:
+  # Database connection address
+  host: "127.0.0.1"
+  # Database connection port
+  port: 3306
+  # Database name
+  database: ""
+  # Table prefix
+  tablePrefix: ""
+  # Connection username
+  user: ""
+  # Connection password
+  password: ""
+  # Whether to use an encrypted connection
+  useSSL: false
+  # Maximum number of connections
+  maxConnection: 10
+#########################################################################

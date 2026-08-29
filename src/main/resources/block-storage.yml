@@ -1,0 +1,89 @@
+#########################################################################
+# Database type, options are SQLITE, MYSQL, POSTGRESQL
+# Note: we do NOT automatically migrate your data when switching database types :)
+storageType: SQLITE
+
+# Use Base64 encoding for data fields
+base64EncodeVal: true
+
+# Chunk data loading mode
+# Options are:
+# - LOAD_WITH_CHUNK: Load Slime Technology chunk data when a chunk is loaded for the first time during this server session
+# - LOAD_ON_STARTUP: Load all chunk data at once on server startup, which may result in a longer startup time
+# By default LOAD_WITH_CHUNK is recommended to save unnecessary memory usage
+# If you notice noticeable lag when loading chunks, switch to LOAD_ON_STARTUP
+dataLoadMode: LOAD_WITH_CHUNK
+#########################################################################
+
+#########################################################################
+# Number of database read/write threads
+# When using MySQL, it is recommended to set the maximum connections to read + write threads, and the number of read threads should be greater than write threads.
+# Note: more threads is not always better - too many can actually hurt performance. Please allocate an appropriate amount.
+
+# Number of read threads
+readExecutorThread: 10
+# Number of write threads
+writeExecutorThread: 5
+#########################################################################
+
+#########################################################################
+# Delayed write feature
+# This feature prevents certain data from being written too frequently, which would otherwise cause a large number of meaningless write requests to pile up in the queue.
+# When enabled, after data changes it will wait (delayedSecond) seconds before writing to the database, provided no further changes occur.
+# A forced save will add any pending data directly to the write queue.
+delayedWriting:
+  # Whether to enable delayed writing
+  enable: true
+  # Delayed write time in seconds
+  delayedSecond: 5
+  # Forced save interval (in seconds)
+  forceSavePeriod: 300
+#########################################################################
+
+#########################################################################
+# SQLite configuration
+sqlite:
+  maxConnection: 5
+#########################################################################
+
+#########################################################################
+# MySQL configuration
+mysql:
+  # Database connection address
+  host: "127.0.0.1"
+  # Database connection port
+  port: 3306
+  # Database name
+  database: ""
+  # Table prefix
+  tablePrefix: ""
+  # Connection username
+  user: ""
+  # Connection password
+  password: ""
+  # Whether to use an encrypted connection
+  useSSL: false
+  # Maximum number of connections
+  maxConnection: 15
+#########################################################################
+
+#########################################################################
+# PostgreSQL configuration
+postgresql:
+  # Database connection address
+  host: "127.0.0.1"
+  # Database connection port
+  port: 3306
+  # Database name
+  database: ""
+  # Table prefix
+  tablePrefix: ""
+  # Connection username
+  user: ""
+  # Connection password
+  password: ""
+  # Whether to use an encrypted connection
+  useSSL: false
+  # Maximum number of connections
+  maxConnection: 15
+#########################################################################
