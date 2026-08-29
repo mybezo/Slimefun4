@@ -1919,7 +1919,7 @@ public final class SlimefunItems {
             LoreBuilder.powerBuffer(65536));
     public static final SlimefunItemStack ENERGIZED_CAPACITOR = new SlimefunItemStack(
             "ENERGIZED_CAPACITOR",
-            Material.LIGHT_STAINED_GLASS,
+            Material.LIGHT_BLUE_STAINED_GLASS,
             "&aEnergized Energy Capacitor",
             LoreBuilder.range(6),
             "",
