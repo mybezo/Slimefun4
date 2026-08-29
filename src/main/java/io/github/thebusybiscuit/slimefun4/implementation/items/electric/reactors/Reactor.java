@@ -505,16 +505,18 @@ public abstract class Reactor extends AbstractEnergyProvider
             for (int slot : getCoolantSlots()) {
                 if (SlimefunUtils.isItemSimilar(menu.getItemInSlot(slot), coolant, true, false)) {
                     menu.consumeItem(slot);
-                    updateHologram(reactor.getBlock(), "&b\u2744 &7100%");
+                    // Hologram di-disable
+                    // updateHologram(reactor.getBlock(), "&b\u2744 &7100%");
                     return true;
                 }
             }
 
             return false;
         } else {
-            updateHologram(
-                    reactor.getBlock(),
-                    "&b\u2744 &7" + getPercentage(operation.getRemainingTicks(), operation.getTotalTicks()) + "%");
+            // Hologram di-disable
+            // updateHologram(
+            // reactor.getBlock(),
+            // "&b\u2744 &7" + getPercentage(operation.getRemainingTicks(), operation.getTotalTicks()) + "%");
         }
 
         return true;
