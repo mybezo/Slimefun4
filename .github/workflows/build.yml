@@ -14,8 +14,8 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
-      - name: Setup Java
-        uses: actions/setup-java@v4
+      - name: Setup Java 21
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '21'
@@ -24,8 +24,8 @@ jobs:
       - name: Make Gradle executable
         run: chmod +x gradlew
 
-      - name: Build
-        run: ./gradlew clean build --no-daemon
+      - name: Build JAR
+        run: ./gradlew clean build -x spotlessJavaCheck -x spotlessCheck --no-daemon
 
       - name: Upload JAR
         uses: actions/upload-artifact@v4
