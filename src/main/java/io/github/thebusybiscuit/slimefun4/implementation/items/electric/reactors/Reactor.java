@@ -60,6 +60,16 @@ import org.bukkit.inventory.ItemStack;
 public abstract class Reactor extends AbstractEnergyProvider
         implements HologramOwner, MachineProcessHolder<FuelOperation> {
 
+    @Override
+    public void updateHologram(@Nonnull Block b, @Nonnull String text) {
+        // Hologram disabled for Reactor / Nuclear Reactor / Nether Star Reactor
+    }
+
+    @Override
+    public void removeHologram(@Nonnull Block b) {
+        // Hologram disabled for Reactor / Nuclear Reactor / Nether Star Reactor
+    }
+
     private static final String MODE = "reactor-mode";
     private static final int INFO_SLOT = 49;
     private static final int COOLANT_DURATION = 50;
