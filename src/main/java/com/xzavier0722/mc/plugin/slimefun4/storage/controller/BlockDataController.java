@@ -860,7 +860,7 @@ public class BlockDataController extends ADataController {
     public void loadWorld(World world) {
         var start = System.currentTimeMillis();
         var worldName = world.getName();
-        logger.log(Level.INFO, "Loading Slimefun block data for world {0}...", worldName);
+        logger.log(Level.INFO, "Loading Slimefun Block data for world {0}...", worldName);
         var chunkKeys = new HashSet<String>();
         var key = new RecordKey(DataScope.CHUNK_DATA);
         key.addField(FieldKey.CHUNK);
@@ -874,7 +874,7 @@ public class BlockDataController extends ADataController {
 
         chunkKeys.forEach(cKey -> loadChunk(LocationUtils.toChunk(world, cKey), false, true));
         logger.log(
-                Level.INFO, "World {0} data loaded in {1}ms", new Object[] {worldName, (System.currentTimeMillis() - start)});
+                Level.INFO, "Data loading complete for world {0}, took {1}ms", new Object[] {worldName, (System.currentTimeMillis() - start)});
     }
 
     public void loadUniversalRecord() {
@@ -1079,13 +1079,6 @@ public class BlockDataController extends ADataController {
 
             if (uniData instanceof SlimefunUniversalBlockData ubd) {
                 if (ubd.hasTrait(UniversalDataTrait.BLOCK)) {
-                    // Initialize secondary occurrence position
-                    var lStr = ubd.getData(UniversalDataTrait.BLOCK.getReservedKey());
-
-                    if (lStr != null && !lStr.isBlank()) {
-                        ubd.setLastPresent(LocationUtils.toLocation(lStr));
-                    }
-
                     var sfItem = SlimefunItem.getById(ubd.getSfId());
 
                     if (sfItem != null && sfItem.isTicking() && ubd.getLastPresent() != null) {
@@ -1472,7 +1465,7 @@ public class BlockDataController extends ADataController {
     }
 
     void scheduleDelayedChunkDataUpdate(SlimefunChunkData chunkData, String key) {
-        var scopeKey = new ChunkKey(DataScope.NONE, chunkData.getChunk());
+        var scopeKey = new ChunkKey(DataScope.NONE, chunkData.getKey());
         var reqKey = new RecordKey(DataScope.CHUNK_DATA);
         reqKey.addCondition(FieldKey.CHUNK, chunkData.getKey());
         reqKey.addCondition(FieldKey.DATA_KEY, key);

@@ -15,7 +15,7 @@ plugins {
 }
 
 group = "com.github.slimefun"
-version = "2026.1"
+version = resolveVersion()
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(21))
@@ -50,6 +50,9 @@ dependencies {
 
     compileOnly(libs.log4j.core)
     testImplementation(libs.junit.jupiter)
+    testImplementation(libs.mockbukkit)
+    testImplementation(libs.paper.api)
+    testImplementation(libs.sqlite.jdbc)
     testRuntimeOnly(libs.junit.platform.launcher)
 
     implementation(libs.dough.api)
@@ -85,6 +88,9 @@ sourceSets.main {
 
 tasks.test {
     useJUnitPlatform()
+    findProperty("slimefunRealDatabase")?.toString()?.let {
+        systemProperty("slimefun.realDatabase", it)
+    }
     testLogging {
         events = setOf(TestLogEvent.FAILED, TestLogEvent.SKIPPED)
         exceptionFormat = TestExceptionFormat.FULL

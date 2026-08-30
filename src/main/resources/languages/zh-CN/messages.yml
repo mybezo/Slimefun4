@@ -66,6 +66,8 @@ commands:
   unbanitem:
     description: Enable a Slimefun item
     success: '&aSuccessfully enabled'
+  tick:
+    description: Manage the tick-freeze breakpoint
 placeholderapi:
   profile-loading: Loading...
 guide:
@@ -278,6 +280,12 @@ messages:
     no-ores: '&cCannot find any nearby ores!'
   android-no-permission: '&cYour android can''t work in a claim/plot where you don''t have permission. It has been paused automatically.'
   invalid-item-in-hand: '&eThe item in your hand is not a Slime Technology item!'
+  not-found: '&cInvalid argument'
+  not-a-number: '&cPlease enter a number'
+  tick-freeze-predicate-reset: '&eThe custom Tick Freeze predicate has been reset'
+  tick-freeze-on: 'On'
+  tick-freeze-off: 'Off'
+  wrong-world: Not in the same world! Can't highlight the block!
 machines:
   pattern-not-found: '&eSorry, I could not recognize this Recipe. Please place the Items in the correct pattern into the Dispenser.'
   unknown-material: '&eSorry, I could not recognize the Item in my dispenser. Please put something in that I know.'

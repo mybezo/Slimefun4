@@ -10,7 +10,7 @@ public interface IDataSourceAdapter<T> {
      * Current database schema version number
      * Update this when the database structure changes
      */
-    int DATABASE_VERSION = 2;
+    int DATABASE_VERSION = 3;
 
     void prepare(T config);
 

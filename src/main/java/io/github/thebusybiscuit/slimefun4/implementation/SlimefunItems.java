@@ -1879,7 +1879,7 @@ public final class SlimefunItems {
 
     public static final SlimefunItemStack SMALL_CAPACITOR = new SlimefunItemStack(
             "SMALL_CAPACITOR",
-            Material.ORANGE_STAINED_GLASS,
+            Material.WHITE_GLAZED_TERRACOTTA,
             "&aSmall Energy Capacitor",
             LoreBuilder.range(6),
             "",
@@ -1887,7 +1887,7 @@ public final class SlimefunItems {
             "&8\u21E8 &e\u26A1 &7128 J Capacity");
     public static final SlimefunItemStack MEDIUM_CAPACITOR = new SlimefunItemStack(
             "MEDIUM_CAPACITOR",
-            Material.YELLOW_STAINED_GLASS,
+            Material.LIGHT_BLUE_GLAZED_TERRACOTTA,
             "&aMedium Energy Capacitor",
             LoreBuilder.range(6),
             "",
@@ -1895,7 +1895,7 @@ public final class SlimefunItems {
             LoreBuilder.powerBuffer(512));
     public static final SlimefunItemStack BIG_CAPACITOR = new SlimefunItemStack(
             "BIG_CAPACITOR",
-            Material.LIME_STAINED_GLASS,
+            Material.BLUE_GLAZED_TERRACOTTA,
             "&aBig Energy Capacitor",
             LoreBuilder.range(6),
             "",
@@ -1903,7 +1903,7 @@ public final class SlimefunItems {
             LoreBuilder.powerBuffer(1024));
     public static final SlimefunItemStack LARGE_CAPACITOR = new SlimefunItemStack(
             "LARGE_CAPACITOR",
-            Material.GREEN_STAINED_GLASS,
+            Material.PURPLE_GLAZED_TERRACOTTA,
             "&aLarge Energy Capacitor",
             LoreBuilder.range(6),
             "",
@@ -1911,7 +1911,7 @@ public final class SlimefunItems {
             LoreBuilder.powerBuffer(8192));
     public static final SlimefunItemStack CARBONADO_EDGED_CAPACITOR = new SlimefunItemStack(
             "CARBONADO_EDGED_CAPACITOR",
-            Material.CYAN_STAINED_GLASS,
+            Material.BLACK_GLAZED_TERRACOTTA,
             "&aCarbonado Edged Energy Capacitor",
             LoreBuilder.range(6),
             "",
@@ -1919,7 +1919,7 @@ public final class SlimefunItems {
             LoreBuilder.powerBuffer(65536));
     public static final SlimefunItemStack ENERGIZED_CAPACITOR = new SlimefunItemStack(
             "ENERGIZED_CAPACITOR",
-            Material.LIGHT_BLUE_STAINED_GLASS,
+            Material.RED_GLAZED_TERRACOTTA,
             "&aEnergized Energy Capacitor",
             LoreBuilder.range(6),
             "",
@@ -2526,7 +2526,7 @@ public final class SlimefunItems {
 
     public static final SlimefunItemStack EXP_COLLECTOR = new SlimefunItemStack(
             "XP_COLLECTOR",
-            Material.ENCHANTING_TABLE,
+            HeadTexture.EXP_COLLECTOR,
             "&aEXP Collector",
             "",
             "&fCollects nearby Exp and stores it",
