@@ -43,7 +43,11 @@ public class MagicEyeOfEnder extends SimpleSlimefunItem<ItemUseHandler> {
             } else {
                 // add message to warn player
                 Slimefun.getLocalization()
-                        .sendMessage(p, "messages.usage", true, msg -> msg.replace("%usage%", "穿戴全套末影护甲以发射珍珠"));
+                        .sendMessage(
+                                p,
+                                "messages.usage",
+                                true,
+                                msg -> msg.replace("%usage%", "Wear full Ender Armor to shoot Ender Pearls"));
             }
         };
     }

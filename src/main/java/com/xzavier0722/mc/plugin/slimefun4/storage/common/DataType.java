@@ -1,17 +1,17 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.common;
 
 /**
- * {@link DataType} 是 Slimefun 数据库控制器的类型，
- * 用于区分不同的数据存储类型。
+ * {@link DataType} is the type of a Slimefun database controller,
+ * used to distinguish between different kinds of data storage.
  */
 public enum DataType {
     /**
-     * 玩家档案，通常包含研究进度、背包等其他玩家相关数据。
+     * Player profile, usually contains research progress, backpacks and other player related data.
      */
     PLAYER_PROFILE,
 
     /**
-     * Slimefun 方块数据
+     * Slimefun block data
      */
     BLOCK_STORAGE
 }

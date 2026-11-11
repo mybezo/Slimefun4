@@ -60,7 +60,9 @@ import org.bukkit.persistence.PersistentDataType;
 public final class SlimefunUtils {
 
     private static final String NO_PICKUP_METADATA = "no_pickup";
-    private static final String SOULBOUND_LORE = ChatColor.GRAY + "灵魂绑定";
+    private static final String SOULBOUND_LORE = ChatColor.GRAY + "Soulbound";
+    // Legacy (Chinese) lore, kept for backwards compatibility with existing items
+    private static final String LEGACY_SOULBOUND_LORE = ChatColor.GRAY + "\u7075\u9b42\u7ed1\u5b9a";
 
     private SlimefunUtils() {}
 
@@ -141,7 +143,9 @@ public final class SlimefunUtils {
                     return !sfItem.isDisabled();
                 }
             } else if (meta != null) {
-                return meta.hasLore() && meta.getLore().contains(SOULBOUND_LORE);
+                return meta.hasLore()
+                        && (meta.getLore().contains(SOULBOUND_LORE)
+                                || meta.getLore().contains(LEGACY_SOULBOUND_LORE));
             }
         }
         return false;
@@ -199,6 +203,7 @@ public final class SlimefunUtils {
 
         if (!makeSoulbound && isSoulbound) {
             lore.remove(SOULBOUND_LORE);
+            lore.remove(LEGACY_SOULBOUND_LORE);
         }
 
         meta.setLore(lore);
@@ -579,7 +584,7 @@ public final class SlimefunUtils {
     }
 
     private static boolean isLineIgnored(@Nonnull String line) {
-        return line.equals(SOULBOUND_LORE);
+        return line.equals(SOULBOUND_LORE) || line.equals(LEGACY_SOULBOUND_LORE);
     }
 
     @Deprecated(forRemoval = true)

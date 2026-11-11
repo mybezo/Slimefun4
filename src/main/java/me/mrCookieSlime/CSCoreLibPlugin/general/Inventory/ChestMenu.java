@@ -47,7 +47,7 @@ public class ChestMenu extends SlimefunInventoryHolder {
     private MenuClickHandler playerclick;
 
     @Deprecated(forRemoval = true)
-    // 何意味
+    // What does this mean
     private final Set<UUID> viewers = new CopyOnWriteArraySet<>();
 
     private final AtomicBoolean lock = new AtomicBoolean(false);

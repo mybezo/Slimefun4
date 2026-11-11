@@ -24,10 +24,10 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * {@link ADataController} 是 Slimefun 数据库控制器的抽象类，
- * 提供了对数据源适配器的访问和数据操作的基本方法。
+ * {@link ADataController} is the abstract class of Slimefun database controllers,
+ * providing access to the data source adapter and basic data operations.
  * <br/>
- * 该类提供了对数据库的增删查改操作以及异步读写的支持。
+ * This class provides CRUD operations on the database as well as asynchronous read/write support.
  */
 @Slf4j
 public abstract class ADataController {
@@ -37,23 +37,23 @@ public abstract class ADataController {
 
     private volatile IDataSourceAdapter<?> dataAdapter;
     /**
-     * 数据库读取调度器
+     * Database read executor
      */
     protected ExecutorService readExecutor;
     /**
-     * 数据库写入调度器
+     * Database write executor
      */
     protected ExecutorService writeExecutor;
 
     protected ExecutorService serialWriteExecutor;
 
     /**
-     * 数据库回调调度器
+     * Database callback executor
      */
     @Getter
     protected ExecutorService callbackExecutor;
     /**
-     * 标记当前控制器是否已被关闭
+     * Whether this controller has been shut down
      */
     private volatile boolean destroyed = false;
 
@@ -75,7 +75,7 @@ public abstract class ADataController {
     }
 
     /**
-     * 初始化 {@link ADataController}
+     * Initializes the {@link ADataController}
      *
      * @param dataAdapter   The data source adapter
      * @param maxReadThread Maximum number of read threads
@@ -126,7 +126,7 @@ public abstract class ADataController {
     }
 
     /**
-     * 正常关闭 {@link ADataController}
+     * Gracefully shuts down the {@link ADataController}
      */
     @OverridingMethodsMustInvokeSuper
     public void shutdown() {
@@ -144,13 +144,18 @@ public abstract class ADataController {
 
             while (pendingTask > 0) {
                 var doneTaskPercent = String.format("%.1f", (totalTask - pendingTask) / totalTask * 100);
-                logger.log(Level.INFO, "数据保存中，请稍候... 剩余 {0} 个任务 ({1}%)", new Object[] {pendingTask, doneTaskPercent});
+                logger.log(Level.INFO, "Saving data, please wait... {0} tasks remaining ({1}%)", new Object[] {
+                    pendingTask, doneTaskPercent
+                });
                 TimeUnit.SECONDS.sleep(1);
                 var currentTask = scheduledWriteTasks.size();
 
                 if (pendingTask == currentTask) {
                     if (timer.peek() / 1000 > 10) {
-                        Slimefun.logger().log(Level.WARNING, "检测到耗时保存任务, 请将下面的线程堆栈 完整 发送给开发者以便定位问题: ");
+                        Slimefun.logger()
+                                .log(
+                                        Level.WARNING,
+                                        "Slow save task detected, please send the FULL thread dump below to the developers: ");
                         Slimefun.logger()
                                 .log(Level.WARNING, Slimefun.getProfiler().snapshotThreads());
                     }
@@ -161,7 +166,7 @@ public abstract class ADataController {
                 pendingTask = scheduledWriteTasks.size();
             }
 
-            logger.info("数据保存完成.");
+            logger.info("Data saved.");
         } catch (InterruptedException e) {
             logger.log(Level.WARNING, "Exception thrown while saving data: ", e);
         }

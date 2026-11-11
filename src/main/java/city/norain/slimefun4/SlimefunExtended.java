@@ -31,10 +31,10 @@ public final class SlimefunExtended {
     }
 
     /**
-     * 返回当前服务器的 Minecraft 版本详情，包含主版本号、次版本号和补丁版本号。
-     * 例如：26.1.2 将返回 (26, 1, 2)，而 26.1 将返回 (26, 1, 0)。
+     * Returns the Minecraft version of the current server, including the major, minor and patch version.
+     * For example: 26.1.2 returns (26, 1, 2), and 26.1 returns (26, 1, 0).
      *
-     * 当无法识别服务器版本时，返回 null。
+     * Returns null if the server version cannot be recognized.
      *
      * @since 2026.1
      * @param server
@@ -47,10 +47,10 @@ public final class SlimefunExtended {
             return null;
         }
 
-        // 提取版本号中的数字部分
+        // Extract the numeric part of the version
         String[] versionPart = mcVersion.split("\\.");
 
-        // 可能是快照版本或者是预发布版?
+        // Possibly a snapshot or pre-release?
         if (versionPart.length < 2) {
             return null;
         }
@@ -58,7 +58,7 @@ public final class SlimefunExtended {
         try {
             int majorVersion = Integer.parseInt(versionPart[0]);
 
-            // 自 26.1 开始，Minecraft 版本号格式变为以年份作为主版本号
+            // Since 26.1, Minecraft uses the year as the major version number
             if (majorVersion != 1 && majorVersion < 26) {
                 return null;
             }
@@ -67,7 +67,7 @@ public final class SlimefunExtended {
             int patchVersion = versionPart.length > 2 ? Integer.parseInt(versionPart[2]) : 0;
             return new ServerVersion(majorVersion, minorVersion, patchVersion);
         } catch (NumberFormatException e) {
-            server.getLogger().log(Level.WARNING, "无法解析当前服务器版本号: " + mcVersion, e);
+            server.getLogger().log(Level.WARNING, "Unable to parse the current server version: " + mcVersion, e);
             return null;
         }
     }
@@ -97,7 +97,7 @@ public final class SlimefunExtended {
             databaseDebugMode = true;
 
             Slimefun.getSQLProfiler().start();
-            Slimefun.logger().log(Level.INFO, "已启动数据库调试模式");
+            Slimefun.logger().log(Level.INFO, "Database debug mode enabled");
         } else {
             Configurator.setLevel(HikariConfig.class.getName(), org.apache.logging.log4j.Level.OFF);
             Configurator.setLevel(HikariDataSource.class.getName(), org.apache.logging.log4j.Level.OFF);
@@ -109,7 +109,7 @@ public final class SlimefunExtended {
         try {
             minecraftVersion = MinecraftVersion.of(sf.getServer());
         } catch (UnknownServerVersionException ignored) {
-            // sf.getLogger().log(Level.WARNING, "无法识别你正在使用的服务端版本 :(");
+            // sf.getLogger().log(Level.WARNING, "Unable to recognize the server version you are using :(");
             // return false;
         }
 
@@ -117,9 +117,9 @@ public final class SlimefunExtended {
             sf.getLogger().log(Level.WARNING, "#######################################################");
             sf.getLogger().log(Level.WARNING, "");
             sf.getLogger().log(Level.WARNING, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            sf.getLogger().log(Level.WARNING, "检测到正在使用混合端, Slimefun 将会被禁用!");
-            sf.getLogger().log(Level.WARNING, "混合端已被多个用户报告有使用问题,");
-            sf.getLogger().log(Level.WARNING, "强制绕过检测将不受任何反馈支持.");
+            sf.getLogger().log(Level.WARNING, "Hybrid server detected, Slimefun will be disabled!");
+            sf.getLogger().log(Level.WARNING, "Hybrid servers have been reported to cause issues by multiple users,");
+            sf.getLogger().log(Level.WARNING, "bypassing this check means no support will be provided.");
             sf.getLogger().log(Level.WARNING, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             sf.getLogger().log(Level.WARNING, "");
             sf.getLogger().log(Level.WARNING, "#######################################################");
@@ -130,8 +130,8 @@ public final class SlimefunExtended {
             sf.getLogger().log(Level.WARNING, "#######################################################");
             sf.getLogger().log(Level.WARNING, "");
             sf.getLogger().log(Level.WARNING, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            sf.getLogger().log(Level.WARNING, "检测到你禁用了环境兼容性检查!");
-            sf.getLogger().log(Level.WARNING, "未通过兼容性检查将无法受到反馈支持.");
+            sf.getLogger().log(Level.WARNING, "You have disabled the environment compatibility check!");
+            sf.getLogger().log(Level.WARNING, "No support will be provided if the compatibility check fails.");
             sf.getLogger().log(Level.WARNING, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             sf.getLogger().log(Level.WARNING, "");
             sf.getLogger().log(Level.WARNING, "#######################################################");

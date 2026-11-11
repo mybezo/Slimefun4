@@ -52,17 +52,17 @@ public class StringUtil {
     }
 
     /**
-     * 格式化详细线程信息
+     * Formats detailed thread information
      */
     public static String formatDetailedThreadInfo(ThreadInfo threadInfo) {
         StringBuilder sb = new StringBuilder();
 
-        // 线程名和基本信息
+        // Thread name and basic info
         sb.append(threadInfo.getThreadName());
         sb.append(" #").append(threadInfo.getThreadId());
         sb.append(" ").append(threadInfo.getThreadState());
 
-        // 锁信息
+        // Lock info
         if (threadInfo.getLockName() != null) {
             sb.append(" on ").append(threadInfo.getLockName());
             if (threadInfo.getLockOwnerName() != null) {
@@ -73,7 +73,7 @@ public class StringUtil {
 
         sb.append("\n");
 
-        // 线程状态详情
+        // Thread state details
         sb.append("   Thread.State: ").append(threadInfo.getThreadState());
         if (threadInfo.getBlockedTime() > 0) {
             sb.append(" (blocked for ").append(threadInfo.getBlockedTime()).append("ms)");
@@ -83,19 +83,19 @@ public class StringUtil {
         }
         sb.append("\n");
 
-        // 堆栈跟踪
+        // Stack trace
         StackTraceElement[] stackTrace = threadInfo.getStackTrace();
         for (int i = 0; i < stackTrace.length; i++) {
             StackTraceElement element = stackTrace[i];
             sb.append("\tat ").append(element.toString()).append("\n");
 
-            // 第一个堆栈元素的锁信息
+            // Lock info of the first stack element
             if (i == 0 && threadInfo.getLockName() != null) {
                 sb.append("\t- ").append(getThreadStateDescription(threadInfo)).append("\n");
             }
         }
 
-        // 持有的锁
+        // Held locks
         if (threadInfo.getLockedMonitors().length > 0) {
             sb.append("   Locked monitors:\n");
             Arrays.stream(threadInfo.getLockedMonitors())
@@ -103,7 +103,7 @@ public class StringUtil {
                             sb.append("\t- locked ").append(monitor.toString()).append("\n"));
         }
 
-        // 持有的同步器
+        // Held synchronizers
         if (threadInfo.getLockedSynchronizers().length > 0) {
             sb.append("   Locked synchronizers:\n");
             Arrays.stream(threadInfo.getLockedSynchronizers())

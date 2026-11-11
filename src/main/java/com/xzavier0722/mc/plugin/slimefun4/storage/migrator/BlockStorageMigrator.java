@@ -64,11 +64,12 @@ public class BlockStorageMigrator implements IMigrator {
                 Files.copy(chunk.toPath(), chunkBak, StandardCopyOption.REPLACE_EXISTING);
                 Files.delete(chunk.toPath());
             } catch (Exception e) {
-                Slimefun.logger().log(Level.WARNING, "备份旧数据 " + chunk.getName() + " 时出现问题", e);
+                Slimefun.logger()
+                        .log(Level.WARNING, "An error occurred while backing up old data " + chunk.getName(), e);
                 status = MigrateStatus.FAILED;
             }
         } else {
-            Slimefun.logger().log(Level.WARNING, "未检测到区块数据，跳过迁移。");
+            Slimefun.logger().log(Level.WARNING, "No chunk data found, skipping migration.");
         }
 
         Bukkit.getWorlds().forEach(this::migrateWorld);
@@ -102,7 +103,7 @@ public class BlockStorageMigrator implements IMigrator {
     }
 
     private void migrateWorld(World w) {
-        Slimefun.logger().log(Level.INFO, "开始迁移方块数据: " + w.getName());
+        Slimefun.logger().log(Level.INFO, "Migrating block data of world: " + w.getName());
         var fList = new File(blockFolder, w.getName()).listFiles();
         if (fList == null) {
             return;
@@ -113,10 +114,10 @@ public class BlockStorageMigrator implements IMigrator {
         for (var f : fList) {
             var id = f.getName();
             id = id.substring(0, id.length() - 4);
-            Slimefun.logger().log(Level.INFO, "正在迁移方块数据: " + id + "(" + ++count + "/" + total + ")");
+            Slimefun.logger().log(Level.INFO, "Migrating block data: " + id + "(" + ++count + "/" + total + ")");
 
             if (SlimefunItem.getById(id) == null) {
-                Slimefun.logger().log(Level.WARNING, "检测到不存在的方块 ID (" + id + "), 已跳过迁移.");
+                Slimefun.logger().log(Level.WARNING, "Unknown block ID (" + id + ") detected, skipped.");
                 continue;
             }
 
@@ -155,7 +156,7 @@ public class BlockStorageMigrator implements IMigrator {
                 migrateInv(menu, f);
             }
         } catch (Throwable e) {
-            Slimefun.logger().log(Level.SEVERE, "迁移方块时发生错误: " + locStr, e);
+            Slimefun.logger().log(Level.SEVERE, "An error occurred while migrating block: " + locStr, e);
         }
     }
 
@@ -193,12 +194,12 @@ public class BlockStorageMigrator implements IMigrator {
         var total = keys.size();
         var count = 0;
         for (var key : keys) {
-            Slimefun.logger().log(Level.INFO, "正在迁移区块数据: " + ++count + "/" + total);
+            Slimefun.logger().log(Level.INFO, "Migrating chunk data: " + ++count + "/" + total);
             var arr = key.split(";");
             try {
                 var w = Bukkit.getWorld(arr[0]);
                 if (w == null) {
-                    Slimefun.logger().log(Level.WARNING, "区块所在世界未加载，忽略: " + arr[0]);
+                    Slimefun.logger().log(Level.WARNING, "World of the chunk is not loaded, ignoring: " + arr[0]);
                     continue;
                 }
 
@@ -209,7 +210,7 @@ public class BlockStorageMigrator implements IMigrator {
                         Slimefun.getDatabaseManager().getBlockDataController().getChunkData(c);
                 data.entrySet().forEach(each -> chunkData.setData(each.getKey(), each.getValue()));
             } catch (Throwable e) {
-                Slimefun.logger().log(Level.SEVERE, "迁移区块数据时发生错误: " + key, e);
+                Slimefun.logger().log(Level.SEVERE, "An error occurred while migrating chunk data: " + key, e);
             }
         }
     }

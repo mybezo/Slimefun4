@@ -14,7 +14,7 @@ public interface SqlConstants {
     String TABLE_NAME_UNIVERSAL_DATA = "universal_data";
     /**
      * @deprecated
-     * 由于设计不当，该表已被弃用
+     * This table is deprecated due to a poor design
      */
     String TABLE_NAME_TABLE_INFORMATION = "table_information";
 
@@ -46,7 +46,7 @@ public interface SqlConstants {
 
     /**
      * @deprecated
-     * 由于设计不当，该字段已被弃用
+     * This field is deprecated due to a poor design
      */
     String FIELD_TABLE_VERSION = "table_version";
 

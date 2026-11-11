@@ -264,10 +264,10 @@ public final class Slimefun extends JavaPlugin implements SlimefunAddon, ICompat
         } else if (!PaperLib.isPaper()) {
             getLogger().log(Level.WARNING, "#######################################################");
             getLogger().log(Level.WARNING, "");
-            getLogger().log(Level.WARNING, "自 24/12/22 起 Slimefun 汉化版");
-            getLogger().log(Level.WARNING, "转为 Paper 插件, 你必须要使用 Paper");
-            getLogger().log(Level.WARNING, "或其分支才可使用 Slimefun.");
-            getLogger().log(Level.WARNING, "立即下载 Paper: https://papermc.io/downloads/paper");
+            getLogger().log(Level.WARNING, "Since 24/12/22, this Slimefun build");
+            getLogger().log(Level.WARNING, "is a Paper plugin, you must use Paper");
+            getLogger().log(Level.WARNING, "or one of its forks to use Slimefun.");
+            getLogger().log(Level.WARNING, "Download Paper now: https://papermc.io/downloads/paper");
             getLogger().log(Level.WARNING, "");
             getLogger().log(Level.WARNING, "#######################################################");
             getServer().getPluginManager().disablePlugin(this);
@@ -314,31 +314,32 @@ public final class Slimefun extends JavaPlugin implements SlimefunAddon, ICompat
         isNewlyInstalled = !new File("data-storage/Slimefun").exists();
 
         // Creating all necessary Folders
-        logger.log(Level.INFO, "正在创建文件夹...");
+        logger.log(Level.INFO, "Creating directories...");
         createDirectories();
 
         // Load various config settings into our cache
         cfgManager.load();
         registry.load(this);
 
-        logger.log(Level.INFO, "正在加载数据库...");
+        logger.log(Level.INFO, "Loading database...");
         if (PlayerProfileMigrator.getInstance().hasOldData()
                 || BlockStorageMigrator.getInstance().hasOldData()) {
             Slimefun.logger().warning("====================================================");
             Slimefun.logger().warning("\n");
-            Slimefun.logger().log(Level.WARNING, "!!! 检测到使用文件储存的旧玩家数据 !!!");
-            Slimefun.logger().warning("请在服务器加载完成后, 使用 /sf migrate confirm 进行迁移!");
-            Slimefun.logger().warning("如果不迁移, 旧版本的数据将会失效!!!");
+            Slimefun.logger().log(Level.WARNING, "!!! Legacy file-based player data detected !!!");
+            Slimefun.logger().warning("Please run /sf migrate confirm after the server has finished loading!");
+            Slimefun.logger().warning("If you do not migrate, the old data will be lost!!!");
             Slimefun.logger().warning("\n");
-            Slimefun.logger().warning("需要使用数据库的用户, 请关服后在以下配置文件中配置数据库:");
-            Slimefun.logger().warning("block-storage.yml 和 profile-storage.yml");
+            Slimefun.logger()
+                    .warning("If you want to use a database, stop the server and configure it in the following files:");
+            Slimefun.logger().warning("block-storage.yml and profile-storage.yml");
             Slimefun.logger().warning("\n");
             Slimefun.logger().warning("====================================================");
         }
         databaseManager.init();
 
         // Set up localization
-        logger.log(Level.INFO, "正在加载语言文件...");
+        logger.log(Level.INFO, "Loading language files...");
 
         var config = cfgManager.getPluginConfig();
         String chatPrefix = config.getString("options.chat-prefix");
@@ -349,7 +350,10 @@ public final class Slimefun extends JavaPlugin implements SlimefunAddon, ICompat
 
         // Make sure that the network size is a valid input
         if (networkSize < 1) {
-            logger.log(Level.WARNING, "'networks.max-size' 大小设置错误! 它必须大于1, 而你设置的是: {0}", networkSize);
+            logger.log(
+                    Level.WARNING,
+                    "Your 'networks.max-size' setting is misconfigured! It must be at least 1, it was set to: {0}",
+                    networkSize);
             networkSize = 1;
         }
 
@@ -363,22 +367,22 @@ public final class Slimefun extends JavaPlugin implements SlimefunAddon, ICompat
         analyticsService.start();
 
         // Registering all GEO Resources
-        logger.log(Level.INFO, "加载矿物资源...");
+        logger.log(Level.INFO, "Loading GEO-Resources...");
         GEOResourcesSetup.setup();
 
-        logger.log(Level.INFO, "加载自定义标签...");
+        logger.log(Level.INFO, "Loading Tags...");
         loadTags();
 
-        logger.log(Level.INFO, "加载物品...");
+        logger.log(Level.INFO, "Loading items...");
         loadItems();
 
-        logger.log(Level.INFO, "加载研究项目...");
+        logger.log(Level.INFO, "Loading researches...");
         loadResearches();
 
         PostSetup.setupWiki();
 
         // All Slimefun Listeners
-        logger.log(Level.INFO, "正在注册监听器...");
+        logger.log(Level.INFO, "Registering listeners...");
 
         // Inject downstream extra staff
         SlimefunExtended.init(this);
@@ -435,18 +439,18 @@ public final class Slimefun extends JavaPlugin implements SlimefunAddon, ICompat
         hologramsService.start();
         ticker.start(this);
 
-        logger.log(Level.INFO, "正在加载第三方插件支持...");
+        logger.log(Level.INFO, "Loading third-party plugin integrations...");
         integrations.start();
 
         gitHubService.start(this);
 
         if (cfgManager.isAutoUpdate()) {
-            // 汉化版自动更新
+            // Auto updater
             Bukkit.getScheduler().scheduleSyncDelayedTask(this, new AutoUpdateTask(this, getFile()));
         }
 
         // Hooray!
-        logger.log(Level.INFO, "Slimefun 完成加载, 耗时 {0}", getStartupTime(timestamp));
+        logger.log(Level.INFO, "Slimefun has finished loading in {0}", getStartupTime(timestamp));
     }
 
     @Override
@@ -598,7 +602,7 @@ public final class Slimefun extends JavaPlugin implements SlimefunAddon, ICompat
                 getLogger()
                         .log(
                                 Level.WARNING,
-                                "我们无法识别你正在使用的 Minecraft 版本 ({0})",
+                                "We could not recognize the version of Minecraft you are using ({0})",
                                 getServer().getMinecraftVersion());
                 return false;
             }
@@ -626,7 +630,7 @@ public final class Slimefun extends JavaPlugin implements SlimefunAddon, ICompat
                     .log(
                             Level.SEVERE,
                             x,
-                            () -> "错误: 无法识别服务器 Minecraft 版本, Slimefun v"
+                            () -> "Error: Could not determine Environment or version of Minecraft for Slimefun v"
                                     + getDescription().getVersion());
 
             // We assume "unsupported" if something went wrong.

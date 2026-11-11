@@ -432,7 +432,7 @@ public class BlockListener implements Listener {
         return amount;
     }
 
-    // 美化可旋转类 (如头颅) 物品放置
+    // Prettify placement of rotatable items (such as heads)
     private void optimizePlacement(SlimefunItem sfItem, Block block, Location l) {
         if (block.getBlockData() instanceof Rotatable rotatable
                 && !(rotatable.getRotation() == BlockFace.UP || rotatable.getRotation() == BlockFace.DOWN)) {

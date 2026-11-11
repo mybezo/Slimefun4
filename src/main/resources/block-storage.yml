@@ -1,89 +1,89 @@
 #########################################################################
-# 数据库类型, 可选的有 SQLITE, MYSQL, POSTGRESQL
-# 注意: 在切换数据库类型时, 我们并不会自动帮你迁移数据 :)
+# Database type, available options: SQLITE, MYSQL, POSTGRESQL
+# Note: data is NOT migrated automatically when you switch the database type :)
 storageType: SQLITE
 
-# 使用Base64编码数据字段
+# Encode data fields with Base64
 base64EncodeVal: true
 
-# 区块数据加载模式
-# 可选的有:
-# - LOAD_WITH_CHUNK: 当本次开服期间内区块首次加载时加载粘液区块数据
-# - LOAD_ON_STARTUP: 当开服时一次性加载全部区块数据，可能会导致开服时间较长
-# 默认情况下推荐使用 LOAD_WITH_CHUNK 以节省不必要的内存开销
-# 如发现加载区块时发生明显卡顿，请更改为 LOAD_ON_STARTUP
+# Chunk data loading mode
+# Available options:
+# - LOAD_WITH_CHUNK: loads Slimefun chunk data when a chunk is loaded for the first time since startup
+# - LOAD_ON_STARTUP: loads all chunk data at once on startup, may increase startup time
+# LOAD_WITH_CHUNK is recommended by default to save unnecessary memory
+# If you notice lag spikes when chunks load, switch to LOAD_ON_STARTUP
 dataLoadMode: LOAD_WITH_CHUNK
 #########################################################################
 
 #########################################################################
-# 数据库读写线程数
-# 当使用 MySQL 时，建议将最大连接数设置为 读取 + 写入线程数，且读取线程数量应当大于写入线程。
-# 注意: 线程数并非越多越好，过多反而会导致性能下降。请分配合适的数量。
+# Database read/write threads
+# When using MySQL, it is recommended to set the max connections to read + write threads, with more read threads than write threads.
+# Note: more threads is not always better, too many will degrade performance. Please choose a reasonable amount.
 
-# 读取线程数
+# Read threads
 readExecutorThread: 10
-# 写入线程数
+# Write threads
 writeExecutorThread: 5
 #########################################################################
 
 #########################################################################
-# 延迟写入功能
-# 本功能用于防止某些数据被频繁写入导致队列中存在大量无意义的写入请求。
-# 启用本功能后，当数据发生更改后会等待 (delayedSecond) 秒，如无其它改动再写入数据库。
-# 强制保存时会将等待中的数据直接加入写入队列。
+# Delayed writing
+# This prevents frequently changing data from flooding the queue with pointless write requests.
+# When enabled, changed data waits (delayedSecond) seconds and is only written if there are no further changes.
+# A force save adds all waiting data to the write queue immediately.
 delayedWriting:
-  # 是否启用延迟写入
+  # Whether to enable delayed writing
   enable: true
-  # 延迟写入秒数
+  # Delay in seconds
   delayedSecond: 5
-  # 强制保存间隔（单位：秒）
+  # Force save interval (in seconds)
   forceSavePeriod: 300
 #########################################################################
 
 #########################################################################
-# Sqlite 配置
+# Sqlite settings
 sqlite:
   maxConnection: 5
 #########################################################################
 
 #########################################################################
-# MySQL 配置
+# MySQL settings
 mysql:
-  # 数据库连接地址
+  # Database host
   host: "127.0.0.1"
-  # 数据库连接端口
+  # Database port
   port: 3306
-  # 数据库名
+  # Database name
   database: ""
-  # 表前缀
+  # Table prefix
   tablePrefix: ""
-  # 连接用户名
+  # Username
   user: ""
-  # 连接用户密码
+  # Password
   password: ""
-  # 是否使用加密连接
+  # Whether to use an encrypted connection
   useSSL: false
-  # 最大连接数
+  # Max connections
   maxConnection: 15
 #########################################################################
 
 #########################################################################
-# PostgreSQL 配置
+# PostgreSQL settings
 postgresql:
-  # 数据库连接地址
+  # Database host
   host: "127.0.0.1"
-  # 数据库连接端口
+  # Database port
   port: 3306
-  # 数据库名
+  # Database name
   database: ""
-  # 表前缀
+  # Table prefix
   tablePrefix: ""
-  # 连接用户名
+  # Username
   user: ""
-  # 连接用户密码
+  # Password
   password: ""
-  # 是否使用加密连接
+  # Whether to use an encrypted connection
   useSSL: false
-  # 最大连接数
+  # Max connections
   maxConnection: 15
 #########################################################################

@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 import org.bukkit.plugin.Plugin;
 
 /**
- * 提供Wiki相关实用方法
+ * Wiki related utilities
  *
  * @author ybw0014
  */
@@ -26,24 +26,24 @@ public final class WikiUtils {
     }
 
     /**
-     * 读取附属的 wiki.json 并设置物品的 Wiki 按钮
+     * Reads the wiki.json of an addon and sets up the Wiki buttons of its items
      *
-     * @param addon 附属 {@link SlimefunAddon} 实例
+     * @param addon the {@link SlimefunAddon} instance
      */
     public static void setupJson(Plugin addon) {
         setupJson(addon, page -> page);
     }
 
     /**
-     * 读取附属的 wiki.json 并设置物品的 Wiki 按钮
-     * 可对页面地址进行更改
+     * Reads the wiki.json of an addon and sets up the Wiki buttons of its items
+     * The page URL can be modified
      *
-     * @param plugin 附属 {@link SlimefunAddon} 实例
-     * @param formatter 对页面地址进行更改
+     * @param plugin the {@link SlimefunAddon} instance
+     * @param formatter modifies the page URL
      */
     public static void setupJson(Plugin plugin, Function<String, String> formatter) {
         if (!(plugin instanceof SlimefunAddon)) {
-            throw new IllegalArgumentException("该插件不是 Slimefun 附属");
+            throw new IllegalArgumentException("This plugin is not a Slimefun addon");
         }
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(plugin.getClass().getResourceAsStream("/wiki.json"), StandardCharsets.UTF_8))) {
@@ -64,9 +64,12 @@ public final class WikiUtils {
             }
 
             plugin.getLogger()
-                    .log(Level.INFO, MessageFormat.format("加载了 {0} 中 {1} 个物品的 Wiki 页面", plugin.getName(), count));
+                    .log(
+                            Level.INFO,
+                            MessageFormat.format("Loaded Wiki pages for {1} items from {0}", plugin.getName(), count));
         } catch (Exception e) {
-            plugin.getLogger().log(Level.SEVERE, MessageFormat.format("无法加载 {0} 的 wiki.json", plugin.getName()), e);
+            plugin.getLogger()
+                    .log(Level.SEVERE, MessageFormat.format("Unable to load wiki.json of {0}", plugin.getName()), e);
         }
     }
 }

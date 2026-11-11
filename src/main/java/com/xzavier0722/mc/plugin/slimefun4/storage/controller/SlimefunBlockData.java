@@ -12,10 +12,10 @@ import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * {@link SlimefunBlockData} 是 Slimefun 中机器等方块类物品的数据存储容器。
+ * {@link SlimefunBlockData} is the data container for block items such as machines in Slimefun.
  * <br/>
- * 它包含了方块对应的键值容器、位置信息和菜单，
- * 是 Slimefun 中常用的方块数据存储类。
+ * It holds the key-value container, location and menu of the block,
+ * and is the commonly used block data storage class in Slimefun.
  *
  * @author Xzavier0722
  *

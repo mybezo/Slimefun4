@@ -914,8 +914,8 @@ public class SlimefunItem implements Placeable {
      * Note that you only need to provide the page name itself,
      * the URL to our wiki is prepended automatically.
      *
-     * 返回非官方中文Wiki地址
-     * 下游应使用 {@link SlimefunItem#addWikiPage(String)} 来添加Wiki页面
+     * Returns the Wiki URL
+     * Addons should use {@link SlimefunItem#addWikiPage(String)} to add Wiki pages
      *
      * @param page
      *            The associated wiki page
@@ -923,21 +923,23 @@ public class SlimefunItem implements Placeable {
     @Deprecated
     public final void addOfficialWikipage(@Nonnull String page) {
         Validate.notNull(page, "Wiki page cannot be null.");
-        // 转换链接
+        // Convert the link
         page = page.replace("#", "?id=");
         wikiURL = Optional.of("https://slimefun-wiki.guizhanss.cn/" + page);
     }
 
     /**
-     * 指定该物品的 Wiki 页面
+     * Sets the Wiki page of this item
      *
-     * @param page 物品的 Wiki 页面
+     * @param page the Wiki page of this item
      */
     public final void addWikiPage(@Nonnull String page) {
         Validate.notNull(page, "Wiki page cannot be null.");
 
         if (addon == null) {
-            Slimefun.logger().warning("该物品\"" + getId() + "\"暂未注册, 请在物品注册后再添加Wiki页面");
+            Slimefun.logger()
+                    .warning("The item \"" + getId()
+                            + "\" is not registered yet, please add the Wiki page after the item has been registered");
             return;
         }
         if (addon.getWikiURL() != null) {

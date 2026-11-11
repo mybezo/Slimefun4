@@ -75,7 +75,7 @@ public class DatabasePatchV3 extends DatabasePatch {
 
                     var migratedItem = ItemStackDataCodec.serialize(itemStack);
                     if (migratedItem.length == 0) {
-                        throw new IllegalStateException("迁移后的物品数据为空");
+                        throw new IllegalStateException("Migrated item data is empty");
                     }
                     update.setBytes(1, migratedItem);
                     update.setString(2, result.getString(ownerField));
@@ -87,7 +87,7 @@ public class DatabasePatchV3 extends DatabasePatch {
                     logger.get()
                             .log(
                                     Level.SEVERE,
-                                    "无法迁移旧版物品数据: table=" + table + ", " + ownerField + "="
+                                    "Unable to migrate legacy item data: table=" + table + ", " + ownerField + "="
                                             + result.getString(ownerField) + ", slot="
                                             + result.getInt(FIELD_INVENTORY_SLOT),
                                     exception);
@@ -96,12 +96,13 @@ public class DatabasePatchV3 extends DatabasePatch {
             update.executeBatch();
         }
 
-        logger.get()
-                .log(Level.INFO, "物品数据迁移完成: table={0}, migrated={1}, failed={2}", new Object[] {table, migrated, failed
-                });
+        logger.get().log(Level.INFO, "Item data migration finished: table={0}, migrated={1}, failed={2}", new Object[] {
+            table, migrated, failed
+        });
 
         if (failed > 0) {
-            throw new SQLException("仍有 " + failed + " 条物品数据无法迁移，数据库版本未更新");
+            throw new SQLException("There are still " + failed
+                    + " item records that could not be migrated, the database version was not updated");
         }
     }
 

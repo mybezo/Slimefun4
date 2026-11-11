@@ -7,7 +7,7 @@ import java.util.function.UnaryOperator;
 import org.bukkit.command.CommandSender;
 
 /**
- * 聊天相关方法
+ * Chat related utilities
  * @author ybw0014
  */
 public class ChatUtils {
@@ -16,19 +16,19 @@ public class ChatUtils {
     }
 
     /**
-     * 发送带 Slimefun 前缀的消息
-     * @param sender 消息接收人
-     * @param message 消息
+     * Sends a message with the Slimefun prefix
+     * @param sender the message receiver
+     * @param message the message
      */
     public static void sendMessage(CommandSender sender, String message) {
         sender.sendMessage(Slimefun.getLocalization().getChatPrefix() + ChatColors.color(message));
     }
 
     /**
-     * 发送带 Slimefun 前缀的消息
-     * @param sender 消息接收人
-     * @param message 消息
-     * @param function 对消息进行处理的{@link Function}
+     * Sends a message with the Slimefun prefix
+     * @param sender the message receiver
+     * @param message the message
+     * @param function the {@link Function} used to process the message
      */
     public static void sendMessage(CommandSender sender, String message, UnaryOperator<String> function) {
         sendMessage(sender, function.apply(message));

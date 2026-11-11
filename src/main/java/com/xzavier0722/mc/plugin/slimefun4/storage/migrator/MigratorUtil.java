@@ -18,7 +18,7 @@ class MigratorUtil {
             var backupPath = Path.of("data-storage/Slimefun/old_data/" + dir.getName() + ".zip");
 
             if (Files.exists(backupPath, LinkOption.NOFOLLOW_LINKS)) {
-                Slimefun.logger().log(Level.WARNING, "检测到已存在的备份数据, 跳过备份");
+                Slimefun.logger().log(Level.WARNING, "Existing backup data detected, skipping backup");
                 return true;
             }
 
@@ -33,14 +33,18 @@ class MigratorUtil {
                             Files.copy(path, zs);
                             zs.closeEntry();
                         } catch (IOException e) {
-                            Slimefun.logger().log(Level.WARNING, "备份旧数据 " + dir.getName() + " 时出现问题", e);
+                            Slimefun.logger()
+                                    .log(
+                                            Level.WARNING,
+                                            "An error occurred while backing up old data " + dir.getName(),
+                                            e);
                         }
                     });
                 }
             }
             return true;
         } catch (Exception e) {
-            Slimefun.logger().log(Level.WARNING, "备份旧数据 " + dir.getName() + " 时出现问题", e);
+            Slimefun.logger().log(Level.WARNING, "An error occurred while backing up old data " + dir.getName(), e);
             return false;
         }
     }
@@ -55,7 +59,7 @@ class MigratorUtil {
 
             Files.delete(dir.toPath());
         } catch (Exception e) {
-            Slimefun.logger().log(Level.WARNING, "删除文件夹 " + dir.getAbsolutePath() + " 时出现问题", e);
+            Slimefun.logger().log(Level.WARNING, "An error occurred while deleting folder " + dir.getAbsolutePath(), e);
         }
     }
 

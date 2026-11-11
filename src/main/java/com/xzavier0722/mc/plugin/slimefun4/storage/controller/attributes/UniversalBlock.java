@@ -5,13 +5,13 @@ import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunUniversalD
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 
 /**
- * 这个属性用于声明 {@link SlimefunItem} 使用了 {@link SlimefunUniversalData}
+ * This attribute declares that a {@link SlimefunItem} uses {@link SlimefunUniversalData}
  * <p>
- * 当这个 {@link SlimefunItem} 作为机器时, 对应材质需要支持
- * 使用 PDC 存储容器 (用于识别 UUID).
- * 否则无法将这个物品/机器绑定到一个通用数据上.
+ * When this {@link SlimefunItem} is a machine, its material must support
+ * a PDC storage container (used to identify the UUID).
+ * Otherwise this item/machine cannot be bound to universal data.
  *
- * 查看此处了解支持 PDC 的物品材质:
+ * See here for materials that support PDC:
  * <a href="https://jd.papermc.io/paper/1.21/org/bukkit/block/TileState.html">Paper Doc</a>
  *
  * @author NoRainCity

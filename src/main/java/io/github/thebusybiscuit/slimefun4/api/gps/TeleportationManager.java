@@ -79,7 +79,7 @@ public final class TeleportationManager {
         if (teleporterUsers.add(p.getUniqueId())) {
             SoundEffect.TELEPORTATION_MANAGER_OPEN_GUI.playFor(p);
             PlayerProfile.fromUUID(ownerUUID, profile -> {
-                ChestMenu menu = new ChestMenu("&3传送机");
+                ChestMenu menu = new ChestMenu("&3Teleporter");
                 menu.addMenuCloseHandler(pl -> {
                     teleporterUsers.remove(pl.getUniqueId());
                     pages.remove(pl.getUniqueId());
@@ -206,7 +206,7 @@ public final class TeleportationManager {
         long unsafeTime = Math.min(4 * distanceSquared(source, destination) / speed, 40);
 
         // Fixes #3573 - Using Math.max is a safer way to ensure values > 0 than relying on addition.
-        // Fixes #1138 - 确保传送时间不会溢出
+        // Fixes #1138 - make sure the teleport time does not overflow
         return Math.max(1, NumberUtils.longToInt(unsafeTime));
     }
 

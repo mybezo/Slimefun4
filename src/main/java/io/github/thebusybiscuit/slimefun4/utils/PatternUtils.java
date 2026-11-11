@@ -26,5 +26,7 @@ public final class PatternUtils {
     public static final Pattern MINECRAFT_TAG = Pattern.compile("#minecraft:[a-z_]+");
     public static final Pattern SLIMEFUN_TAG = Pattern.compile("#slimefun:[a-z_]+");
 
-    public static final Pattern USES_LEFT_LORE = Pattern.compile(ChatColors.color("&7还可以使用 &e[0-9]+ 次"));
+    public static final Pattern USES_LEFT_LORE = Pattern.compile(ChatColors.color("&e[0-9]+ Uses? &7left")
+            // Legacy (Chinese) lore, kept for backwards compatibility with existing items
+            + "|" + ChatColors.color("&7\u8fd8\u53ef\u4ee5\u4f7f\u7528 &e[0-9]+ \u6b21"));
 }

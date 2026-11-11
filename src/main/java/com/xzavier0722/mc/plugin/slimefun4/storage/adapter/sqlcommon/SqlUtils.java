@@ -128,7 +128,7 @@ public class SqlUtils {
     }
 
     /**
-     * @deprecated 请使用 {@link #buildKvStr(FieldKey, Object)}
+     * @deprecated Use {@link #buildKvStr(FieldKey, Object)}
      */
     @Deprecated
     public static String buildKvStr(FieldKey key, String val) {
@@ -144,7 +144,7 @@ public class SqlUtils {
     }
 
     /**
-     * @deprecated 请使用 {@link #toSqlValStr(FieldKey, Object)}
+     * @deprecated Use {@link #toSqlValStr(FieldKey, Object)}
      */
     @Deprecated
     public static String toSqlValStr(FieldKey key, String val) {

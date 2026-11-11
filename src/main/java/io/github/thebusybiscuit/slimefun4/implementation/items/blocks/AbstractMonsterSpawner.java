@@ -33,6 +33,10 @@ import org.bukkit.inventory.meta.ItemMeta;
  */
 public abstract class AbstractMonsterSpawner extends SlimefunItem implements DistinctiveItem {
 
+    // Legacy (Chinese) lore, kept for backwards compatibility with existing items
+    private static final String LEGACY_TYPE_PREFIX = "\u7c7b\u578b: ";
+    private static final String LEGACY_TYPE_PLACEHOLDER = "<\u7c7b\u578b>";
+
     @ParametersAreNonnullByDefault
     AbstractMonsterSpawner(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
@@ -57,10 +61,11 @@ public abstract class AbstractMonsterSpawner extends SlimefunItem implements Dis
         for (String line : meta.getLore()) {
             String stripColor = ChatColor.stripColor(line);
 
-            if ((stripColor.startsWith("类型: ") || stripColor.startsWith("Type:"))
-                    && (!line.contains("<类型>") || line.contains("<Type>"))) {
+            if ((stripColor.startsWith(LEGACY_TYPE_PREFIX) || stripColor.startsWith("Type:"))
+                    && !line.contains(LEGACY_TYPE_PLACEHOLDER)
+                    && !line.contains("<Type>")) {
                 EntityType type = EntityType.valueOf(ChatColor.stripColor(line)
-                        .replace("类型: ", "")
+                        .replace(LEGACY_TYPE_PREFIX, "")
                         .replace("Type: ", "")
                         .replace(' ', '_')
                         .toUpperCase(Locale.ROOT));
@@ -112,9 +117,9 @@ public abstract class AbstractMonsterSpawner extends SlimefunItem implements Dis
 
         for (int i = 0; i < lore.size(); i++) {
             String currentLine = lore.get(i);
-            if (currentLine.contains("<Type>") || currentLine.contains("<类型>")) {
-                String typeName = type == null ? "空" : ChatUtils.humanize(type.name());
-                lore.set(i, currentLine.replace("<Type>", typeName).replace("<类型>", typeName));
+            if (currentLine.contains("<Type>") || currentLine.contains(LEGACY_TYPE_PLACEHOLDER)) {
+                String typeName = type == null ? "Empty" : ChatUtils.humanize(type.name());
+                lore.set(i, currentLine.replace("<Type>", typeName).replace(LEGACY_TYPE_PLACEHOLDER, typeName));
                 break;
             }
         }

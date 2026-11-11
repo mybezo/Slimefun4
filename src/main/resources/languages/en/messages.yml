@@ -1,3 +1,9 @@
+sf-cn:
+  timings:
+    started: '&aThe SQL profiler has been started.'
+    running: '&aThe SQL profiler is already running, stop it first to view the results.'
+    stopped: '&aThe SQL profiler has been stopped, see the report here: &f{0}'
+    warning: '&cAn error occurred while generating the performance report! Check the console for more details.'
 commands:
   help: Displays this help screen
   cheat: Allows you to cheat Items
@@ -8,6 +14,38 @@ commands:
   search: Searches your Guide for the given term
   open_guide: Opens Slimefun's guide without using the book
   stats: Shows some Stats about a Player
+  id: Gets the Slimefun ID of the item in your hand
+
+  cleardata:
+    description: Clears world data
+    success: '&aCleared &c{1} &adata of &c{0}'
+    block: 'block'
+    oil: 'oil'
+    worldNotFound: '&cWorld not found'
+    confirm: '&eRun /sf cleardata <World> <Type> confirm to confirm this operation. &cThis cannot be undone!'
+
+  banitem:
+    description: Disables a Slimefun item
+    success: '&aItem disabled successfully'
+
+  unbanitem:
+    description: Enables a Slimefun item
+    success: '&aItem enabled successfully'
+
+  migrate:
+    description: Migrates legacy data
+    confirm: "&cAre you sure you want to migrate the data? Run /sf migrate confirm to start the migration\nPlease do not let players join the server or use Slimefun machines and items during the migration!"
+    started: '&aMigrating legacy data...'
+    success: '&aSuccessfully migrated legacy data (%migrate_type%) to the database.'
+    failed: '&cAn error occurred during the migration, please check the console.'
+    already-migrated: '&aThere is no data to migrate.'
+    in-progress: '&aThe migration is in progress...'
+
+  blockdata:
+    description: Modifies Slimefun block data
+
+  tick:
+    description: Controls Slimefun tick breakpoints
 
   research:
     description: Unlock/Reset researches for a player
@@ -20,6 +58,7 @@ commands:
     player-never-joined: '&4No player with that name could be found!'
     backpack-does-not-exist: '&4The specified backpack does not exist!'
     restored-backpack-given: '&aYour backpack has been restored and was added to your inventory!'
+    searching: '&eSearching...'
 
   charge:
     description: Charges the item you are holding
@@ -177,6 +216,17 @@ messages:
   deprecated-item: '&4This item has been deprecated and will be removed from Slimefun soon.'
   researching-is-disabled: '&cResearching has been disabled on this server. Everything is unlocked by default!'
   await-deletion: '&cYou cannot place a Slimefun block so soon after breaking one. Try again shortly.'
+  android-no-permission: '&cYour Android cannot work in a claim/plot you do not have permission for, it has been paused automatically.'
+  invalid-item-in-hand: '&eThe item in your hand is not a Slimefun item!'
+  not-found: '&cInvalid argument'
+  not-a-number: '&cPlease enter a number'
+  tick-rate: 'Tick rate: %tick-rate%'
+  tick-query: 'Tick Freeze: %mode%, Tick rate: %tick-rate%'
+  tick-mode: '&eTick Freeze: %mode%'
+  tick-freeze-predicate-reset: '&eThe custom Tick Freeze predicate has been reset'
+  tick-freeze-on: 'ON'
+  tick-freeze-off: 'OFF'
+  wrong-world: 'Not in the same world! Cannot highlight the block!'
 
   multi-tool:
     mode-change: '&b%device% mode changed to: &9%mode%'
@@ -191,6 +241,9 @@ messages:
     select: 'Select this recipe'
     temporarily-disabled: '&eThis Auto-Crafter was temporarily disabled. You can re-enable it at any time!'
     re-enabled: '&eThis Auto-Crafter was re-enabled!'
+    recipe-unavailable: |
+      &cThis item cannot be used. Either you have not unlocked it yet or it has been disabled on this server.
+      &7If you have not unlocked this item yet, please unlock it before crafting it.
 
     tooltips:
       enabled:
@@ -292,6 +345,10 @@ machines:
 
   ANCIENT_PEDESTAL:
     obstructed: '&4Pedestal is obstructed! &cRemove anything above the pedestal!'
+    in-use: '&4There is still an item on the pedestal!'
+
+  TABLE_SAW:
+    no-slimefun-item: '&cYou cannot use Slimefun items on the Table Saw!'
 
   HOLOGRAM_PROJECTOR:
     enter-text: '&7Please enter your desired Hologram Text into your Chat. &r(Color Codes are supported!)'
@@ -356,6 +413,9 @@ villagers:
 backpack:
   already-open: '&cSorry, this Backpack is open somewhere else!'
   no-stack: '&cYou cannot stack Backpacks'
+  set-name: '&ePlease enter a name for your backpack'
+  not-backpack-owner: '&cThe owner of this backpack is not online, you cannot use it!'
+  not-original-item: '&cPlease do not switch the item in your hand while entering the name!'
 
 workbench:
   not-enhanced: '&4You cannot use Slimefun items in a normal workbench'
@@ -454,6 +514,7 @@ android:
       cannot-add-yourself: '&cYou cannot add yourself!'
       add-success: '&aAdded trusted player %player% successfully.'
       delete-success: '&aDeleted trusted player %player% successfully.'
+      reach-limit: '&cYou have reached the maximum amount of trusted players (10), please remove one first!'
 
 languages:
   default: 'Server-Default'

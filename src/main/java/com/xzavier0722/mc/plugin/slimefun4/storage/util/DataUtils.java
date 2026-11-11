@@ -13,11 +13,11 @@ import org.bukkit.inventory.ItemStack;
 
 public class DataUtils {
     /**
-     * 将 {@link ItemStack} 序列化为兼容旧 API 的 Base64 字符串。
+     * Serializes an {@link ItemStack} into a Base64 string compatible with the legacy API.
      *
-     * @param itemStack 要序列化的 {@link ItemStack}
-     * @return Base64 编码的物品数据
-     * @deprecated 请使用 {@link #serializeItemStackBytes(ItemStack)}，避免 Base64 带来的额外空间占用
+     * @param itemStack the {@link ItemStack} to serialize
+     * @return the Base64 encoded item data
+     * @deprecated Use {@link #serializeItemStackBytes(ItemStack)} to avoid the extra space used by Base64
      */
     @Deprecated
     public static String serializeItemStack(ItemStack itemStack) {
@@ -39,22 +39,24 @@ public class DataUtils {
                     && Slimefun.getDatabaseManager().getBlockDataStorageType() == StorageType.MYSQL
                     && itemData.length > 16_777_215) {
 
-                throw new IllegalArgumentException("检测到过大物品, 请联系物品对应插件开发者解决: " + StringUtil.itemStackToString(itemStack)
-                        + ", size = " + itemData.length);
+                throw new IllegalArgumentException(
+                        "Oversized item detected, please contact the developer of the plugin that provides this item: "
+                                + StringUtil.itemStackToString(itemStack) + ", size = " + itemData.length);
             }
 
             return itemData;
         } catch (Throwable e) {
-            Slimefun.logger().log(Level.SEVERE, "序列化物品时出现错误, 将存储空值", e);
+            Slimefun.logger()
+                    .log(Level.SEVERE, "An error occurred while serializing an item, an empty value will be stored", e);
             return new byte[0];
         }
     }
 
     /**
-     * 反序列化数据库中的 {@link ItemStack}。支持当前原生二进制格式和旧版 Bukkit 对象流格式。
+     * Deserializes an {@link ItemStack} from the database. Supports the current native binary format and the legacy Bukkit object stream format.
      *
-     * @param itemData 要反序列化的二进制数据
-     * @return 反序列化后的 {@link ItemStack} 对象
+     * @param itemData the binary data to deserialize
+     * @return the deserialized {@link ItemStack}
      */
     @Nullable public static ItemStack deserializeItemStack(byte[] itemData) {
         if (itemData == null || itemData.length == 0) {
@@ -69,21 +71,25 @@ public class DataUtils {
             Debug.log(TestCase.BACKPACK, "Deserialized itemstack: " + result);
 
             if (result.getType().isAir()) {
-                Slimefun.logger().log(Level.SEVERE, "反序列化数据库中的物品失败! 对应物品无法显示.");
+                Slimefun.logger()
+                        .log(
+                                Level.SEVERE,
+                                "Failed to deserialize an item from the database! The item cannot be displayed.");
             }
 
             return result;
         } catch (Exception ex) {
-            throw new RuntimeException("反序列化物品时出现错误, 对应物品无法显示", ex);
+            throw new RuntimeException(
+                    "An error occurred while deserializing an item, the item cannot be displayed", ex);
         }
     }
 
     /**
-     * 从兼容旧 API 的 Base64 字符串反序列化物品。
+     * Deserializes an item from a Base64 string compatible with the legacy API.
      *
-     * @param base64Str Base64 编码的物品数据
-     * @return 反序列化后的物品
-     * @deprecated 请使用 {@link #deserializeItemStack(byte[])}
+     * @param base64Str the Base64 encoded item data
+     * @return the deserialized item
+     * @deprecated Use {@link #deserializeItemStack(byte[])}
      */
     @Deprecated
     @Nullable public static ItemStack deserializeItemStack(String base64Str) {
