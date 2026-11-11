@@ -1,0 +1,26 @@
+# Automatically builds Slimefun on every push and pull request.
+# The built jar is uploaded as a workflow artifact, and pushes to master
+# also update the "exp" pre-release (see build-ci.yml).
+
+name: Auto Build
+
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  packages: read
+
+concurrency:
+  group: auto-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    uses: ./.github/workflows/build-ci.yml

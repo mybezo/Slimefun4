@@ -48,6 +48,6 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "exp"
           prerelease: true
-          title: "Slimefun 自动构建版本"
+          title: "Slimefun Automatic Build"
           files: |
             build/libs/${{ env.SLIMEFUN_ARTIFACT_NAME }}

@@ -2368,7 +2368,7 @@ public final class SlimefunItems {
 
     public static final SlimefunItemStack SMALL_CAPACITOR = new SlimefunItemStack(
             "SMALL_CAPACITOR",
-            HeadTexture.CAPACITOR_25,
+            Material.ORANGE_STAINED_GLASS,
             "&aSmall Energy Capacitor",
             LoreBuilder.range(6),
             "",
@@ -2376,7 +2376,7 @@ public final class SlimefunItems {
             "&8\u21E8 &e\u26A1 &7128 J Capacity");
     public static final SlimefunItemStack MEDIUM_CAPACITOR = new SlimefunItemStack(
             "MEDIUM_CAPACITOR",
-            HeadTexture.CAPACITOR_25,
+            Material.YELLOW_STAINED_GLASS,
             "&aMedium Energy Capacitor",
             LoreBuilder.range(6),
             "",
@@ -2384,7 +2384,7 @@ public final class SlimefunItems {
             LoreBuilder.powerBuffer(512));
     public static final SlimefunItemStack BIG_CAPACITOR = new SlimefunItemStack(
             "BIG_CAPACITOR",
-            HeadTexture.CAPACITOR_25,
+            Material.LIME_STAINED_GLASS,
             "&aBig Energy Capacitor",
             LoreBuilder.range(6),
             "",
@@ -2392,7 +2392,7 @@ public final class SlimefunItems {
             LoreBuilder.powerBuffer(1024));
     public static final SlimefunItemStack LARGE_CAPACITOR = new SlimefunItemStack(
             "LARGE_CAPACITOR",
-            HeadTexture.CAPACITOR_25,
+            Material.GREEN_STAINED_GLASS,
             "&aLarge Energy Capacitor",
             LoreBuilder.range(6),
             "",
@@ -2400,7 +2400,7 @@ public final class SlimefunItems {
             LoreBuilder.powerBuffer(8192));
     public static final SlimefunItemStack CARBONADO_EDGED_CAPACITOR = new SlimefunItemStack(
             "CARBONADO_EDGED_CAPACITOR",
-            HeadTexture.CAPACITOR_25,
+            Material.CYAN_STAINED_GLASS,
             "&aCarbonado Edged Energy Capacitor",
             LoreBuilder.range(6),
             "",
@@ -2408,7 +2408,7 @@ public final class SlimefunItems {
             LoreBuilder.powerBuffer(65536));
     public static final SlimefunItemStack ENERGIZED_CAPACITOR = new SlimefunItemStack(
             "ENERGIZED_CAPACITOR",
-            HeadTexture.CAPACITOR_25,
+            Material.LIGHT_BLUE_STAINED_GLASS,
             "&aEnergized Energy Capacitor",
             LoreBuilder.range(6),
             "",
@@ -2748,7 +2748,7 @@ public final class SlimefunItems {
 
     public static final SlimefunItemStack ELECTRIC_PRESS = new SlimefunItemStack(
             "ELECTRIC_PRESS",
-            HeadTexture.ELECTRIC_PRESS,
+            Material.PISTON,
             "&eElectric Press",
             "",
             LoreBuilder.machine(MachineTier.MEDIUM, MachineType.MACHINE),
@@ -2756,7 +2756,7 @@ public final class SlimefunItems {
             LoreBuilder.powerPerSecond(16));
     public static final SlimefunItemStack ELECTRIC_PRESS_2 = new SlimefunItemStack(
             "ELECTRIC_PRESS_2",
-            HeadTexture.ELECTRIC_PRESS,
+            Material.STICKY_PISTON,
             "&eElectric Press &7- &eII",
             "",
             LoreBuilder.machine(MachineTier.END_GAME, MachineType.MACHINE),
@@ -2843,7 +2843,7 @@ public final class SlimefunItems {
             "&fCore Component of an Energy Network");
     public static final SlimefunItemStack ENERGY_CONNECTOR = new SlimefunItemStack(
             "ENERGY_CONNECTOR",
-            HeadTexture.ENERGY_CONNECTOR,
+            Material.RED_STAINED_GLASS,
             "&eEnergy Connector",
             LoreBuilder.range(6),
             "",
@@ -3071,7 +3071,7 @@ public final class SlimefunItems {
 
     public static final SlimefunItemStack EXP_COLLECTOR = new SlimefunItemStack(
             "XP_COLLECTOR",
-            HeadTexture.EXP_COLLECTOR,
+            Material.ENCHANTING_TABLE,
             "&aEXP Collector",
             "",
             "&fCollects nearby Exp and stores it",
