@@ -543,24 +543,15 @@ public abstract class Reactor extends AbstractEnergyProvider
             for (int slot : getCoolantSlots()) {
                 if (SlimefunUtils.isItemSimilar(menu.getItemInSlot(slot), coolant, true, false)) {
                     menu.consumeItem(slot);
-                    updateHologram(reactor.getBlock(), "&b\u2744 &7100%");
                     return true;
                 }
             }
 
             return false;
-        } else {
-            updateHologram(
-                    reactor.getBlock(),
-                    "&b\u2744 &7" + getPercentage(operation.getRemainingTicks(), operation.getTotalTicks()) + "%");
         }
 
+        // The coolant hologram above reactors has been disabled.
         return true;
-    }
-
-    private float getPercentage(int time, int total) {
-        int passed = ((total - time) % COOLANT_DURATION);
-        return Math.round(((((COOLANT_DURATION - passed) * 100.0F) / COOLANT_DURATION) * 100.0F) / 100.0F);
     }
 
     @ParametersAreNonnullByDefault
